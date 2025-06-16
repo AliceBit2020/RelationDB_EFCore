@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2_DeleteBehavior", "2_Delet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loading_data", "Loading_data\Loading_data.csproj", "{94F7496C-CCE4-4699-948F-9AC7FBE8F714}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneToOne", "OneToOne\OneToOne.csproj", "{2FEA8456-3BEF-4E61-AA71-BADC032EF3FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManyToMany", "ManyToMany\ManyToMany.csproj", "{0AD12E4E-AE75-4FE6-A785-03915A36590C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{94F7496C-CCE4-4699-948F-9AC7FBE8F714}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94F7496C-CCE4-4699-948F-9AC7FBE8F714}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94F7496C-CCE4-4699-948F-9AC7FBE8F714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FEA8456-3BEF-4E61-AA71-BADC032EF3FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FEA8456-3BEF-4E61-AA71-BADC032EF3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FEA8456-3BEF-4E61-AA71-BADC032EF3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FEA8456-3BEF-4E61-AA71-BADC032EF3FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AD12E4E-AE75-4FE6-A785-03915A36590C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AD12E4E-AE75-4FE6-A785-03915A36590C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AD12E4E-AE75-4FE6-A785-03915A36590C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AD12E4E-AE75-4FE6-A785-03915A36590C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

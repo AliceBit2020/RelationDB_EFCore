@@ -13,7 +13,7 @@ namespace Loading_data
 
             /////////Як зчитувати данні 
             ///
-
+            ///////////////////////////////////////////////////////////////
             //  Eager loading жадная загрузка
             
 
@@ -62,6 +62,8 @@ namespace Loading_data
                 }
             }
 
+
+            ////////////////////////////////////////////////////////////
             ////// Explicite loading (явная загрузка)
 
             //using (EntityDatabase db = new EntityDatabase())
