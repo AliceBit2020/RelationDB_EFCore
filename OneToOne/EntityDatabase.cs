@@ -9,31 +9,37 @@ namespace OneToOne
 {
     internal class EntityDatabase : DbContext
     {
-        public DbSet<Team> Teams { get; set; }
-        public DbSet<Player> Players { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
         public EntityDatabase()
         {
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=relationsdb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-O6DMGPJ\SQLEXPRESS;Database=TestDB_OneToOne;TrustServerCertificate=true;Trusted_Connection=True;");
         }
     }
 
-    public class Team
+    public class User
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public List<Player> Players { get; set; } // гравці команди
+        public string Login { get; set; }
+        public string Password { get; set; }
+
+        public UserProfile Profile { get; set; }
     }
 
-    public class Player
+    public class UserProfile
     {
         public int Id { get; set; }
-        public string Name { get; set; }
 
-        public int TeamId { get; set; }
-        public Team Team { get; set; }  // команда гравця
+        public string Name { get; set; }
+        public int Age { get; set; }
+
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
+
+  
 }

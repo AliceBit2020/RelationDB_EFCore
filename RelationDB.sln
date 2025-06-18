@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1 d17.14
+VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1_RelationDB", "RelationDB\1_RelationDB.csproj", "{FB4FF304-1C00-46CE-890F-0BAE4AFFA6A7}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneToOne", "OneToOne\OneToOne.csproj", "{2FEA8456-3BEF-4E61-AA71-BADC032EF3FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManyToMany", "ManyToMany\ManyToMany.csproj", "{0AD12E4E-AE75-4FE6-A785-03915A36590C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManyToMany_new", "ManyToMany_new\ManyToMany_new.csproj", "{3EFAC277-60BB-4D71-A756-22D784A61D13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{0AD12E4E-AE75-4FE6-A785-03915A36590C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AD12E4E-AE75-4FE6-A785-03915A36590C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AD12E4E-AE75-4FE6-A785-03915A36590C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EFAC277-60BB-4D71-A756-22D784A61D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EFAC277-60BB-4D71-A756-22D784A61D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EFAC277-60BB-4D71-A756-22D784A61D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EFAC277-60BB-4D71-A756-22D784A61D13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
