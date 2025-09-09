@@ -6,6 +6,9 @@
         {
             EntityDatabase obj = new EntityDatabase();
             obj.SaveChanges();
+
+
+            Team team = new Team { Name="Team1"};///ініціалізатор об'єкту, ініт по властивостям (get;set;)
         }
     }
 }

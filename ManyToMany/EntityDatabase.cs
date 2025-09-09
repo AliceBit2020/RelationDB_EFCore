@@ -11,11 +11,11 @@ namespace ManyToMany
     {
         public DbSet<Course> Courses { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<StudentCourse> studentCourses { get; set; }
         public EntityDatabase()
         {
             Database.EnsureCreated();
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<StudentCourse>()
@@ -34,7 +34,7 @@ namespace ManyToMany
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=relationsdb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-O6DMGPJ\SQLEXPRESS;Database=relationsdb;Trusted_Connection=True;TrustServerCertificate=true;");
         }
     }
 

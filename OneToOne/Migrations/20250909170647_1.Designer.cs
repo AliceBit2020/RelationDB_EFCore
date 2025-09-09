@@ -2,17 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RelationDB;
+using OneToOne;
 
 #nullable disable
 
-namespace _1_RelationDB.Migrations
+namespace OneToOne.Migrations
 {
     [DbContext(typeof(EntityDatabase))]
-    partial class EntityDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20250909170647_1")]
+    partial class _1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace _1_RelationDB.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("RelationDB.Player", b =>
+            modelBuilder.Entity("OneToOne.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,22 +32,20 @@ namespace _1_RelationDB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int")
-                        .HasColumnName("player_team_FK");
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("Players");
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("RelationDB.Team", b =>
+            modelBuilder.Entity("OneToOne.UserProfile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,27 +53,39 @@ namespace _1_RelationDB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Teams");
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("UserProfiles");
                 });
 
-            modelBuilder.Entity("RelationDB.Player", b =>
+            modelBuilder.Entity("OneToOne.UserProfile", b =>
                 {
-                    b.HasOne("RelationDB.Team", null)
-                        .WithMany("Players")
-                        .HasForeignKey("TeamId")
+                    b.HasOne("OneToOne.User", "User")
+                        .WithOne("Profile")
+                        .HasForeignKey("OneToOne.UserProfile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RelationDB.Team", b =>
+            modelBuilder.Entity("OneToOne.User", b =>
                 {
-                    b.Navigation("Players");
+                    b.Navigation("Profile")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

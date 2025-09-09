@@ -8,10 +8,10 @@ using RelationDB;
 
 #nullable disable
 
-namespace RelationDB.Migrations
+namespace _1_RelationDB.Migrations
 {
     [DbContext(typeof(EntityDatabase))]
-    [Migration("20250616162403_1")]
+    [Migration("20250909164537_1")]
     partial class _1
     {
         /// <inheritdoc />
@@ -37,7 +37,8 @@ namespace RelationDB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TeamId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("player_team_FK");
 
                     b.HasKey("Id");
 
@@ -65,13 +66,11 @@ namespace RelationDB.Migrations
 
             modelBuilder.Entity("RelationDB.Player", b =>
                 {
-                    b.HasOne("RelationDB.Team", "Team")
+                    b.HasOne("RelationDB.Team", null)
                         .WithMany("Players")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("RelationDB.Team", b =>

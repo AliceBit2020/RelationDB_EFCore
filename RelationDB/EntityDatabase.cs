@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RelationDB
@@ -25,8 +26,17 @@ namespace RelationDB
             /////  по навыгаційним властивостям FluentApi
             modelBuilder.Entity<Player>()
                 .HasOne(p => p.Team)
-                .WithMany(t => t.Players);
-                //.HasForeignKey(p => p.TeamInfoKey);
+                .WithMany(t => t.Players)
+            .HasForeignKey(p => p.TeamId);
+
+            //modelBuilder.Entity<Player>().HasOne<Team>().WithMany()
+            //    .HasForeignKey(p => p.TeamId).HasConstraintName("FK_Player_Team").OnDelete(DeleteBehavior.Restrict);
+
+
+            //modelBuilder.Entity<Player>().Property(p => p.TeamId).HasColumnName("player_team_FK");
+
+            
+
 
         }
     }
@@ -43,6 +53,8 @@ namespace RelationDB
 
     public class Player
     {
+        [Key]
+        [ForeignKey("UserId")]
         public int Id { get; set; }
         public string Name { get; set; }
 
@@ -50,8 +62,10 @@ namespace RelationDB
         ///Як додати foreign key???
 
 
-        //////1.Створюємо навігаційну властивість з назвою класс TeamId
-      //  public int TeamId { get; set; }///автоматически создаст foreign key  відобразиться в базі
+        //////1.Створюємо foreign key з назвою класс TeamId
+        
+      
+       public int TeamId { get; set; }///автоматически создаст foreign key  відобразиться в базі
 
 
         ///2.  
@@ -64,7 +78,17 @@ namespace RelationDB
         ////навыгаційна властивість на стороні С# щоб гравець знав про свою команду
       
         
-      //  [ForeignKey("TeamInfoKey")]////  data anotation --  atributes
+       //[ForeignKey("TeamId")]////  data anotation --  atributes
         public Team Team { get; set; }
+    }
+
+    public class User
+    {
+        [Key]
+        [ForeignKey("PlayerId")]
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string SecondName { get; set; }
+
     }
 }
