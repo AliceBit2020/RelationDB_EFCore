@@ -10,6 +10,8 @@ namespace RelationDB
         public DbSet<Team> Teams { get; set; }///Teams in DB
         public DbSet<Player> Players { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
         public EntityDatabase()
         {
             Database.EnsureCreated();
@@ -35,7 +37,7 @@ namespace RelationDB
 
             //modelBuilder.Entity<Player>().Property(p => p.TeamId).HasColumnName("player_team_FK");
 
-            
+           
 
 
         }
@@ -54,10 +56,10 @@ namespace RelationDB
     public class Player
     {
         [Key]
-        [ForeignKey("UserId")]
+        [ForeignKey(nameof(User))]
         public int Id { get; set; }
-        public string Name { get; set; }
-
+        public double Raiting { get; set; }
+         public User User { get; set; }
 
         ///Як додати foreign key???
 
@@ -84,11 +86,11 @@ namespace RelationDB
 
     public class User
     {
-        [Key]
-        [ForeignKey("PlayerId")]
         public int Id { get; set; }
         public string Name { get; set; }
         public string SecondName { get; set; }
+       
+
 
     }
 }

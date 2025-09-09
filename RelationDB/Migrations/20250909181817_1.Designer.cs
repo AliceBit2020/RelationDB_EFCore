@@ -11,7 +11,7 @@ using RelationDB;
 namespace _1_RelationDB.Migrations
 {
     [DbContext(typeof(EntityDatabase))]
-    [Migration("20250909164537_1")]
+    [Migration("20250909181817_1")]
     partial class _1
     {
         /// <inheritdoc />
@@ -27,18 +27,13 @@ namespace _1_RelationDB.Migrations
             modelBuilder.Entity("RelationDB.Player", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Raiting")
+                        .HasColumnType("float");
 
                     b.Property<int>("TeamId")
-                        .HasColumnType("int")
-                        .HasColumnName("player_team_FK");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -64,13 +59,44 @@ namespace _1_RelationDB.Migrations
                     b.ToTable("Teams");
                 });
 
+            modelBuilder.Entity("RelationDB.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecondName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("RelationDB.Player", b =>
                 {
-                    b.HasOne("RelationDB.Team", null)
+                    b.HasOne("RelationDB.User", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RelationDB.Team", "Team")
                         .WithMany("Players")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Team");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("RelationDB.Team", b =>
