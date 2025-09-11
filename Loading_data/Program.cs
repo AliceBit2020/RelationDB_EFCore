@@ -8,29 +8,35 @@ namespace Loading_data
         {
 
             ////Як заповнити таблиці данними
-          //  GenerateData();
+            //GenerateData();
 
 
             /////////Як зчитувати данні 
             ///
             ///////////////////////////////////////////////////////////////
             //  Eager loading жадная загрузка
-            
+
 
             //using (EntityDatabase db = new EntityDatabase())
             //{
             //    Team? team = db.Teams
             //        .Include(t => t.Players)
             //            .Include(p => p.Stadium).FirstOrDefault();
-                    
+
 
             //    if (team != null)
             //    {
-            //        Console.WriteLine($"Team: {team.Name}  Stadium: {team.Stadium.Name}");
+            //        Console.WriteLine($"Team: {team.Name}  Stadium: {team.Stadium?.Name}");
             //        foreach (var p in team.Players)
             //            Console.WriteLine($"Player: {p.Name}    Country: {p.Country?.Name}    ");
             //    }
             //}
+
+
+            /////////////////////////////////////////////////////
+
+
+
 
             //using (EntityDatabase db = new EntityDatabase())
             //{
@@ -47,20 +53,23 @@ namespace Loading_data
             //    }
             //}
 
-            using (EntityDatabase db = new EntityDatabase())
-            {
-                Team? team = db.Teams
-                    .Include(t => t.Players).ThenInclude(p => p.Country).ThenInclude(c => c.Capital)
-                        .Include(p => p.Stadium)
-                    .FirstOrDefault();
 
-                if (team != null)
-                {
-                    Console.WriteLine($"Team: {team.Name}  Stadium: {team.Stadium.Name}");
-                    foreach (var p in team.Players)
-                        Console.WriteLine($"Player: {p.Name,-30}  Country: {p.Country?.Name,-20}  City: {p.Country.Capital.Name,-20}   ");
-                }
-            }
+            /////////////////////////////////////////////////////
+
+            //using (EntityDatabase db = new EntityDatabase())
+            //{
+            //    Team? team = db.Teams
+            //        .Include(t => t.Players).ThenInclude(p => p.Country).ThenInclude(c => c.Capital)
+            //            .Include(p => p.Stadium)
+            //        .FirstOrDefault();
+
+            //    if (team != null)
+            //    {
+            //        Console.WriteLine($"Team: {team.Name}  Stadium: {team.Stadium.Name}");
+            //        foreach (var p in team.Players)
+            //            Console.WriteLine($"Player: {p.Name,-30}  Country: {p.Country?.Name,-20}  City: {p.Country.Capital.Name,-20}   ");
+            //    }
+            //}
 
 
             ////////////////////////////////////////////////////////////
@@ -68,7 +77,7 @@ namespace Loading_data
 
             //using (EntityDatabase db = new EntityDatabase())
             //{
-            //    var team = db.Teams.FirstOrDefault();
+            //    var team = db.Teams.FirstOrDefault();///1 team
             //    db.Players.Where(p => p.Team.Id == team.Id).Load();
 
             //    Console.WriteLine($"Team: {team?.Name}");
@@ -77,40 +86,34 @@ namespace Loading_data
             //        Console.WriteLine($"Player: {p.Name}");
             //}
 
-            //using (EntityDatabase db = new EntityDatabase())
-            //{
-            //    var team = db.Teams.FirstOrDefault();
-            //    db.Players.Where(p => p.Team.Id == team.Id).Load();
-
-            //    Console.WriteLine($"Team: {team?.Name}");
-
-            //    foreach (var p in team.Players)
-            //        Console.WriteLine($"Player: {p.Name}");
-            //}
-
-            //using (EntityDatabase db = new EntityDatabase())
-            //{
-            //    var team = db.Teams.FirstOrDefault();
-            //    db.Entry(team).Collection(t => t.Players).Load();
-
-            //    Console.WriteLine($"Team: {team?.Name}");
-
-            //    foreach (var p in team.Players)
-            //        Console.WriteLine($"Player: {p.Name}");
-            //}
+            //////////////////////////////////////////////////////
 
 
 
-            //using (EntityDatabase db = new EntityDatabase())
-            //{
-            //    var player = db.Players.FirstOrDefault();
-            //    db.Entry(player).Reference(t => t.Team).Load();
+            using (EntityDatabase db = new EntityDatabase())
+            {
+                var team = db.Teams.FirstOrDefault();
+                db.Entry(team).Collection(t => t.Players).Load();
 
-            //    Console.WriteLine($"Team: {player.Team.Name}");
+                Console.WriteLine($"Team: {team?.Name}");
+
+                foreach (var p in team.Players)
+                    Console.WriteLine($"Player: {p.Name}");
+            }
+
+            /////////////////////////////////////////////////
+
+            using (EntityDatabase db = new EntityDatabase())
+            {
+                var player = db.Players.FirstOrDefault();
+
+                db.Entry(player).Reference(t => t.Team).Load();
+
+                Console.WriteLine($"Team: {player.Team.Name}");
 
 
-            //    Console.WriteLine($"Player: {p.Name}");
-            //}
+                Console.WriteLine($"Player: {player.Name}");
+            }
 
 
             Console.ReadLine();
@@ -130,12 +133,13 @@ namespace Loading_data
                     new Team(){Name= "Бостон Селикс", Stadium =new Stadium(){ Name="Ти-Ди Гарден (Бостон, США)"} },
                     new Team(){Name= "Бруклин Нетс", Stadium =new Stadium(){ Name="Барклайс-центр (Нью-Йорк, США)"} }
 
-
+                  
 
                 };
 
                 db.Teams.AddRange(listItem);
                 db.SaveChanges();
+            
 
                 var listCountry = new List<Country>()
                 {

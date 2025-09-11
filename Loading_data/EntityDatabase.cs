@@ -24,7 +24,7 @@ namespace Loading_data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-O6DMGPJ\SQLEXPRESS;Database=TestDB_TeamRelation;TrustServerCertificate=true;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-O6DMGPJ\SQLEXPRESS;Database=TestDB_TeamRelation1;TrustServerCertificate=true;Trusted_Connection=True;");
         }
     }
 
